@@ -5,13 +5,11 @@
       <v-toolbar-title>Vuetify Dashboard</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn 
+        v-for="link in links"
+        :key="`${link.label}-header-link`"
         text 
         rounded
-        to="/">Home</v-btn>
-      <v-btn 
-      text 
-      rounded
-      to="/login">login</v-btn>
+        :to="link.url">{{ link.label }}</v-btn>
     </v-app-bar>
     <!-- login MOdule -->
     <v-content>
@@ -21,13 +19,14 @@
       <v-row justify="center" no-gutters>
         <v-btn
           v-for="link in links"
-          :key="link"
+          :key="`${link.label}-footer-link`"
           color="white"
           text
           rounded
           class="my-2"
+          :to="link.url"
         >
-          {{ link }}
+          {{ link.label }}
         </v-btn>
         <v-col class="primary lighten-2 py-4 text-center white--text" cols="12">
           {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
@@ -41,7 +40,16 @@
 export default {
   name: "App",
   data: () => ({
-    links: ["Home", "Login"]
+    links: [
+      {
+        label: "Home",
+        url: '/'
+      },
+      {
+        label: "Login",
+        url: '/login'
+      }
+    ]
   }),
 };
 </script>
