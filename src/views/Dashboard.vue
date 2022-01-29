@@ -6,7 +6,24 @@
       :items="desserts"
       :items-per-page="5"
       class="elevation-1"
+      @click:row="selectRow"
     ></v-data-table>
+    <v-snackbar
+      v-model="snackbar"
+    >
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="pink"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -109,7 +126,15 @@
             iron: '6%',
           },
         ],
+        snackbar: false,
+        text: `Hello, I'm a snackbar`,
       }
+    },
+    methods: {
+        selectRow(event){
+            this.text = event.name
+            this.snackbar = true
+        }
     },
   }
 </script>
