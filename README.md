@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # vue-vuetify
 
 ## Project setup
