@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-row class="mt-5">
+        <v-row class="my-5">
             <v-col cols="4" offset="4">
                 <v-card>
                     <v-card-title>Signup</v-card-title>
@@ -54,6 +54,10 @@
                                 </v-btn>
                                 </v-date-picker>
                             </v-dialog>
+                            <v-switch
+                                v-model="agreeTerms"
+                                label="Agree to Terms and Conditions"
+                                ></v-switch>
                             <v-divider></v-divider>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
@@ -76,6 +80,7 @@
                 date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
                 menu: false,
                 modal: false,
+                agreeTerms: false
             }
         },
     }
