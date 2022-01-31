@@ -13,9 +13,9 @@
 				{{ link.label }}
 			</v-btn>
 		</v-app-bar>
-		<v-content>
+		<v-main>
 			<router-view></router-view>
-		</v-content>
+		</v-main>
 		<v-footer color="primary lighten-1" padless>
 			<v-layout justify-center wrap>
 				<v-btn
@@ -46,14 +46,14 @@ export default {
 				{
 					label: 'Home',
 					url: '/'
-				},
+				}, 
 				{
 					label: 'Login',
 					url: '/login'
 				},
 				{
 					label: 'Signup',
-					url: '/signup'
+					url: '/register'
 				},
 				{
 					label: 'Dashboard',
