@@ -5,9 +5,21 @@
                 <v-card>
                     <v-card-title>Signup</v-card-title>
                     <v-card-text>
-                        <v-form>
-                            <v-text-field label="Usernam" type="text" />
-                            <v-text-field label="Email" type="email" />
+                        <v-form ref="signUpForm" v-model="formValidity">
+                            <v-text-field 
+                                label="Usernam" 
+                                type="text"
+                                v-model="username"
+                                :rules="userNameRules"
+                                required
+                                 />
+                            <v-text-field 
+                                label="Email" 
+                                type="email" 
+                                v-model="email"
+                                :rules="emailRules"
+                                required
+                                />
                             <v-autocomplete
                                 v-model="value"
                                 :items="browsers"
@@ -54,14 +66,16 @@
                                 </v-btn>
                                 </v-date-picker>
                             </v-dialog>
-                            <v-switch
-                                v-model="agreeTerms"
+                            <v-checkbox
                                 label="Agree to Terms and Conditions"
-                                ></v-switch>
+                                v-model="agreeTerms"
+                                :rules="agreeToTermRules"
+                                required
+                            ></v-checkbox>
                             <v-divider></v-divider>
                             <v-card-actions>
                                 <v-spacer></v-spacer>
-                                <v-btn color="success" class="mt-2" >Register</v-btn>
+                                <v-btn color="success" class="mt-2" type="submit" :disabled="!formValidity" >Register</v-btn>
                             </v-card-actions>
                         </v-form>
                     </v-card-text>
@@ -80,7 +94,23 @@
                 date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
                 menu: false,
                 modal: false,
-                agreeTerms: false
+                email: '',
+                emailRules: [
+                    value => !!value || "Email is required",
+                    value => value.indexOf('@') !== 0 || "Email should have a username",
+                    value => value.includes('@') || "Email should include an @ symbol",
+                    value => value.indexOf('.') - value.indexOf('@') > 1 || "Email should contain a valid email",
+                    value => value.indexOf('.') <= value.length - 3 || "Email should contain a valid domain extension" 
+                ],
+                username: '',
+                userNameRules: [
+                    value => !!value || "Username is required"
+                ],
+                agreeTerms: false,
+                agreeToTermRules: [
+                    value => !!value || "You Must agree to terms and conditions",
+                ],
+                formValidity: false
             }
         },
     }
